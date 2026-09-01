@@ -9,8 +9,9 @@ class Solution:
         for i in range(m - 1, -1, -1):
             for j in range(n - 1, -1, -1):
                 mul = (ord(num1[i]) - 48) * (ord(num2[j]) - 48)
-                s = mul + res[i + j + 1]
-                res[i + j + 1] = s % 10
-                res[i + j] += s // 10
+                mul += res[i + j + 1]   # add existing carry
+                res[i + j + 1] = mul % 10
+                res[i + j] += mul // 10
         
+        # Convert once at the end
         return "".join(map(str, res)).lstrip("0")
